@@ -59,6 +59,22 @@ class Controller
 */
 }
 
+$action = $_GET['action'];
+if (!empty($action)) {
+   $data = array(
+     'mentions' => array('model' => 'MentionsModel', 'view' = 'MentionsView', 'controller' => 'MentionController')
+     'contact'  => array('contact' => 'ContactModel', 'view' = 'ContactView', 'controller' => 'ContactController')
+   );
+   foreach ($data as $key => $components) {
+       if ($action == $key) {
+           $model = $components['model'];
+           $view = $components['view'];
+           $controller = $components['controller'];
+           break;
+       }
+   }
+}
+
 $model = new Model();
 $controller = new Controller($model);
 $view = new View($controller, $model);
