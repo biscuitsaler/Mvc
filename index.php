@@ -5,7 +5,7 @@ class Model
 
     public function __construct()
     {
-        $this -> string = "Le Mvc , c'est le pied !";
+        $this -> string = "Clique-moi, grand fou!";
     }
 }
 class View
@@ -19,7 +19,7 @@ class View
 
     }
     public function output() {
-        return "<p>" . $this -> model -> string ."</p>";
+        return "<p><a href=\"index.php?action=clicked\">" . $this -> model -> string ."</a></p>";
     }
 }
 class Controller 
@@ -28,9 +28,15 @@ class Controller
     public function __construct($model) {
         $this-> model = $model;
     }
+    public function clicked() {
+        $this -> model -> string = "Ich bin updat&eacute;";
+    }
 }
 $model = new Model();
 $controller = new Controller($model);
 $view = new View($controller, $model);
+if (isset($_GET['action']) && !empty($_GET['action'])) {
+    $controller -> {$_GET['action']} ();
+}
 echo $view -> output();
 
