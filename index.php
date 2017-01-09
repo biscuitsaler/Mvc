@@ -19,7 +19,7 @@ class View
 
     }
     public function output() {
-        return "<p>" .^$this -> model -> string ."</p>";
+        return "<p>" . $this -> model -> string ."</p>";
     }
 }
 class Controller 
@@ -29,3 +29,8 @@ class Controller
         $this-> model = $model;
     }
 }
+$model = new Model();
+$controller = new Controller($model);
+$view = new View($controller, $model);
+echo $view -> output();
+
